@@ -9,9 +9,9 @@ def search():
     #     return redirect('/welcome')
     data = {
         **request.form,
-        'user_id': session["user_id"]
+        'urls': "url"
     }
-    URL.create_recipe(data)
+    URL.create_url(data)
     return redirect('/search/url')
 
 

@@ -2,6 +2,8 @@ from flask import render_template, redirect, request, flash, session
 from flask_app import app
 from flask_bcrypt import Bcrypt
 from flask_app.models.user_model import User
+from flask_app.models.URL_model import URL
+
 
 bcrypt = Bcrypt(app)
 
@@ -11,17 +13,19 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def RegisterAndLogin():
-    # if "user_id" in session:
-    #     return redirect('/welcome')
-    return render_template('dashboard.html')
+    if "user_id" in session:
+        return redirect('/welcome')
+    return render_template('register_and_login.html')
 
 
 # display welcome page
-@app.route('/users/register_and_login')
+@app.route('/welcome')
 def welcome():
-    # if not 'user_id' in session:
-    #         return redirect('/')
-    return render_template('register_and_login.html')
+    if not 'user_id' in session:
+        return redirect('/')
+    user = User.get_by_id({'id': session['user_id']})
+    all_urls = URL.get_all()
+    return render_template('dashboard.html', user = user, all_urls = all_urls)
 
 
 # Logout user

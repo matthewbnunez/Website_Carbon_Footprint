@@ -24,7 +24,7 @@
                 <h1 class="ms-4 my-auto">Website Carbon Footprint</h1>
             </div>
             <div class="d-flex">
-                <form class="m-3" action="/search/url" method="POST" onsubmit="getSite(event)">
+                <form class="m-3" onsubmit="getSite(event)">
                     <div class="input-group">
                         <input type="text" class="form-control border-info" placeholder="Search" id="url" name="url">
                         <button class="btn btn-info">
@@ -34,10 +34,18 @@
                         </button>
                     </div>
                 </form>
-                <a class="btn btn-success m-3 px-4" href="/users/register_and_login">Login</a>
+                <a class="btn btn-success m-3 px-4" href="/users/logout">Logout</a>
             </div>
         </nav>
     </nav>
+    <h2 class="m-3">Welcome, {{user.first_name}}</h2>
+    <tbody>
+        {% for url in all_urls %}
+        <tr>
+            <td>{{url.url}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
     <script type="text/javascript" src="{{ url_for('static', filename='/script.js') }}"></script>
     <div class="m-3" id="siteResult"></div>
 </body>

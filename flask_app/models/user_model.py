@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
+from flask_app.models import URL_model
 from flask import flash
 import re
 EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$")
@@ -31,6 +32,27 @@ class User:
         if len(results) < 1:
             return False
         return cls(results[0])
+
+
+    @classmethod
+    def get_by_id(cls, data):
+        query = "SELECT * FROM users LEFT JOIN URLs on users.id = URLs.user_id WHERE users.id = %(id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        if len(results) < 1:
+            return False
+        user = cls(results[0])
+        list_of_urls = []
+        for row in results:
+            url_data = {
+                **row,
+                'id': row['URLs.id'],
+                'created_at': row['URLs.created_at'],
+                'updated_at': row['URLs.updated_at']
+            }
+            this_url = URL_model.URL(url_data)
+            list_of_urls.append(this_url)
+        user.urls_list = list_of_urls
+        return user
 
 
 # Validate to credentials

@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>hello</h1>
+    <form onsubmit="getSite(event)">
+        <input type="text" class="form-control border-info" placeholder="Search" id="url" name="url">
+        <button class="btn"></button>
+    </form>
+    <script type="text/javascript" src="{{ url_for('static', filename='/script.js') }}"></script>
     <div class="m-3" id="siteResult"></div>
 </body>
 </html>
