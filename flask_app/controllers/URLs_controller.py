@@ -12,11 +12,4 @@ def search():
         'urls': "url"
     }
     URL.create_url(data)
-    return redirect('/search/url')
-
-
-@app.route('/search/url')
-def searchUrl():
-    # if "user_id" in session:
-    #     return redirect('/welcome')
-    return render_template('search_result.html')
+    return redirect('/welcome')
