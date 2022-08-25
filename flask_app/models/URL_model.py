@@ -9,12 +9,13 @@ class URL:
         self.url = data['url']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.user_id = data['User_id']
 
 
     # Creates a new url
     @classmethod
     def create_url(cls, data):
-        query = "INSERT INTO URLS (url) VALUES (%(url)s);"
+        query = "INSERT INTO URLS (url, user_id) VALUES (%(url)s, %(user_id)s);"
         return connectToMySQL(DATABASE).query_db(query, data)
 
     

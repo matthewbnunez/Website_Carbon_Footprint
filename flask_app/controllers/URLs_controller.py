@@ -9,7 +9,7 @@ def search():
     #     return redirect('/welcome')
     data = {
         **request.form,
-        'urls': "url"
+        'user_id': session["user_id"]
     }
     URL.create_url(data)
     return redirect('/welcome')
