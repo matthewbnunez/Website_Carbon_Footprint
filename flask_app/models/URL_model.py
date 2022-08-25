@@ -2,8 +2,6 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import user_model
 from flask_app import DATABASE
 from flask import flash
-# import re
-# URL_REGEX = re.compile(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
 
 
 class URL:
@@ -56,7 +54,4 @@ class URL:
         if len(url_data['url']) < 2:
             flash("URL must content at least 2 characters", "reg")
             is_vaild = False
-        # elif not URL_REGEX.match(url_data['url']):
-        #     flash("invaild URL", "reg")
-        #     is_vaild = False
         return is_vaild
