@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import user_model
 from flask_app import DATABASE
+from flask import flash
 
 
 class URL:
@@ -45,3 +46,12 @@ class URL:
                 all_urls.append(this_url)
             return all_urls
         return results
+
+    # Validate to credentials
+    @staticmethod
+    def validate(url_data):
+        is_vaild = True
+        if len(url_data['url']) < 2:
+            flash("URL must content at least 2 characters", "reg")
+            is_vaild = False
+        return is_vaild

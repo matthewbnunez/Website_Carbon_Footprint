@@ -55,7 +55,7 @@ class User:
         return user
 
 
-# Validate to credentials
+    # Validate to credentials
     @staticmethod
     def validate(user_data):
         is_vaild = True

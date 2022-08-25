@@ -5,8 +5,8 @@ from flask_app.models.URL_model import URL
 
 @app.route('/search', methods=['POST'])
 def search():
-    # if "user_id" in session:
-    #     return redirect('/welcome')
+    if not URL.validate(request.form):
+        return redirect('/')
     data = {
         **request.form,
         'user_id': session["user_id"]

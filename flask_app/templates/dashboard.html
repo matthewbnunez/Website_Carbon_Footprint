@@ -34,20 +34,26 @@
                         </button>
                     </div>
                 </form>
-                <a class="btn btn-success m-3 px-4" href="/users/logout">Logout</a>
+                <a class="btn btn-danger m-3 px-4" href="/users/logout">Logout</a>
             </div>
         </nav>
     </nav>
-    <h2 class="m-3">Welcome, {{user.first_name}}</h2>
-    <tbody>
+    <div class="container bg-light py-3 my-3">
+        <h2 class="m-3">Welcome, {{user.first_name}}</h2>
+        <div class="m-3 rounded bg-primary text-white" id="siteResult"></div>
+        <p class="mx-3">Recent searches</p>
         {% for urls in all_urls %}
-        <tr>
-            <td>{{urls.url}}</td>
-            <td><a onsubmit="getSite(event)">{{urls.url}}view</a>
-        </tr>
+        <div class="m-3 d-flex bg-primary rounded">
+            <h4 class="m-auto text-white">{{urls.url}}</h4>
+            <div>
+                <form onsubmit="getSite(event)" >
+                    <input type="text" id="siteUrl" name="siteUrl" value="{{urls.url}}" hidden>
+                    <button type="submit" class="btn btn-success btn-lg px-3">View</button>
+                </form>
+            </div>
+        </div>
         {%endfor%}
-    </tbody>
+    </div>
     <script type="text/javascript" src="{{ url_for('static', filename='/script.js') }}"></script>
-    <div class="m-3 rounded bg-primary text-white" id="siteResult"></div>
 </body>
 </html>
