@@ -34,7 +34,7 @@
             {% for message in get_flashed_messages(category_filter = ['log']) %}
                 <p>{{message}}</p>
             {% endfor %}
-            <form action="/" method="POST" class="d-flex flex-column text-white">
+            <form action="/users/login" method="POST" class="d-flex flex-column text-white">
                 <p>Email:</p>
                 <input type="text" name="email">
                 <p>Password:</p>
